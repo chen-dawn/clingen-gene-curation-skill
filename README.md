@@ -43,6 +43,12 @@ everything for you.
 
 ## What you'll need (one-time setup)
 
+**You may already have most of this, and you don't have to figure it out yourself.** After you
+install Claude Code, just start a curation and Claude will **check** what's on your computer and —
+with your permission — **install anything that's missing** (or point you to a one-click
+installer). Nothing installs silently, but you won't be left guessing. (For reference: on most
+Macs Python 3 is already present; Node.js usually needs a one-time install.)
+
 1. **Claude Code** — install it from **https://claude.com/claude-code** and sign in. This is the
    app you'll talk to. (It runs in your computer's Terminal.)
 2. **Python 3** — needed to build the Excel workbook and read PDFs. Get it from
@@ -102,15 +108,15 @@ start a curation (below) and it will activate automatically.
    Claude then works through the whole curation and, at each stage, shows you what it found and
    asks before big decisions.
 4. **Get your files.** In your folder you'll end up with:
-   - `…_Scoring_Worksheet.xlsx` — the GCI copy-paste workbook (build this first, before the check),
-   - an **evidence-summary** text you can paste into the GCI,
+   - `…_Scoring_Worksheet.xlsx` — the GCI copy-paste workbook (built first, before the check),
+   - `…_evidence_summary.md` — the evidence-summary text, **saved as its own file**, to paste into the GCI,
    - `…_Curation_Deck.pptx` — the GCEP presentation (built last, after the fact-check).
 
 You never have to run commands yourself — but if you want to, see **Manual script use** at the end.
 
 ---
 
-## How the curation actually works (the 12 steps)
+## How the curation actually works (step by step)
 
 This is what Claude is doing under the hood, in plain language. The running example is
 **STAMBP → microcephaly–capillary malformation syndrome (MIC-CAP)**. For a concrete,
@@ -171,10 +177,16 @@ patient ethnicity, a missing phenotype, and a DNA change the paper never actuall
 **Step 10 — Quality-control checklist.** A final pass over unique labels, scoring caps, ontology
 ids, provenance, and the classification before it's called done.
 
-**Step 11 — Build the presentation (last).** Only after the fact-check does Claude build the
-PowerPoint, so the slides reflect the corrected data: one slide per patient (clinical picture +
-variants + PMID + points) and one per experiment (what was done, what was found, PMID, points,
-and a placeholder for you to paste the figure).
+**Step 11 — Write the evidence summary (from the template).** Using the ClinGen Standardized
+Evidence Summary template (v7.1), Claude drafts the public-facing summary — gene/disease/inheritance,
+the lumping decision, the genetic and experimental evidence, the mechanism, and the class-specific
+summary statement, citing the guideline versions. It's **saved as its own file**
+(`…_evidence_summary.md`) — ready to paste into the GCI.
+
+**Step 12 — Build the presentation (last).** Only after the fact-check, QC, and summary does Claude
+build the PowerPoint, so the slides reflect the corrected data: one slide per patient (clinical
+picture + variants + PMID + points) and one per experiment (what was done, what was found, PMID,
+points, and a placeholder for you to paste the figure).
 
 ---
 

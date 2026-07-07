@@ -154,9 +154,8 @@ review, not pasted. Tabs (one row per evidence item):
   evidence type is used.
 - **Segregation** (eLOD helper), **Summary** (totals → classification), **HPO Reference**, **Legend**.
 
-Then draft the **evidence-summary text** from `references/evidence_summary_template.md`.
-(The **presentation deck is built last — Step 11 — after the cross-check and QC**, so the
-slides reflect the corrected data.)
+The **evidence-summary text** and the **presentation deck** are produced at the **end** (Steps
+11–12), *after* the cross-check and QC, so they reflect the corrected data.
 
 ## Step 9 — Adversarial cross-check against the papers (required)
 
@@ -183,7 +182,7 @@ tool; run them in parallel, or use a Workflow to pipeline them):
 Collect all agent findings, **apply the corrections** to the workbook & evidence summary, and
 give the user a short changelog of what was fixed. Prefer verifying against the actual
 extracted paper text (Step 1), citing the specific figure/table/section where each value
-comes from. Re-run `build_workbook.py` after edits (the deck isn't built until Step 11).
+comes from. Re-run `build_workbook.py` after edits (the summary & deck aren't built until Steps 11–12).
 
 ## Step 10 — Pre-submission QC
 
@@ -191,10 +190,25 @@ Run `references/qc_checklist.md` before declaring the curation ready for GCEP re
 checks disease-entity/MOI, genetic & experimental scoring, ontology/provenance, that the
 cross-check ran, deliverable consistency, and the final classification.
 
-## Step 11 — Build the presentation deck (LAST)
+## Step 11 — Write the evidence summary (from the template)
 
-Build the deck **only after the cross-check (Step 9) and QC (Step 10)** so the slides carry the
-corrected, verified data. Use `scripts/build_deck.js` (white theme, Arial): title → framework →
+Once the data is corrected and QC'd, write the **evidence-summary text** using
+`references/evidence_summary_template.md`. Fill every bracket: gene + synonyms, MOI, disease +
+OMIM/MONDO, first-report year & PMID, the lumping/splitting decision, the genetic-evidence
+summary (unique-variant count, variant types, # individuals/families, recurrent/founder variants,
+"max reached" note), the mechanism, the experimental-evidence summary, "other relevant
+information" (phenotype variability, non-PMID sources, variants evaluated-but-not-scored), and the
+class-specific **Summary** statement. **State the guideline versions** — Evidence Summary v7.1 and
+the SOP version in the approval sentence. This is the text that gets pasted into the GCI and shown
+publicly on clinicalgenome.org, so keep it clear for a non-expert reader.
+
+**Save it as its own file** in the curation folder — e.g. `<GENE>_<disease>_evidence_summary.md`
+(or `.txt`/`.docx`) — a discrete deliverable, separate from the workbook and the deck.
+
+## Step 12 — Build the presentation deck (LAST)
+
+Build the deck **only after the cross-check (Step 9), QC (Step 10), and the evidence summary
+(Step 11)** so the slides carry the corrected, verified data. Use `scripts/build_deck.js` (white theme, Arial): title → framework →
 **one slide per proband** (clinical description + variants + PMID + points) → genetic total →
 **one detailed slide per experiment** (molecular-level methods & findings + PMID + points + a
 dashed **screenshot placeholder** the user fills with figure panels) → experimental total →
