@@ -124,25 +124,24 @@ You never have to run commands yourself — but if you want to, see [Manual scri
 
 ## How the curation actually works (step by step)
 
-This is what Claude is doing under the hood, in plain language. The running example is
-**STAMBP → microcephaly–capillary malformation syndrome (MIC-CAP)**. For a concrete,
-blow-by-blow record of a real run — the actual probands, scores, what the fact-check caught, and
-the final Definitive call — see **[docs/worked-example-STAMBP.md](docs/worked-example-STAMBP.md)**.
+This is what Claude does under the hood, in plain language — the steps are the same for any
+gene. For a concrete, blow-by-blow record of one real run (**STAMBP → microcephaly–capillary
+malformation syndrome**) — the actual probands, scores, what the fact-check caught, and the final
+Definitive call — see **[docs/worked-example-STAMBP.md](docs/worked-example-STAMBP.md)**.
 
-**Step 0 — Gather & organize.** Claude asks you to drop all the PDFs in one folder, then sorts
-them into `ClinGen_SOP/` (the framework docs) and `Literature/` (the papers), renaming each paper
-to `Author Year – short title.pdf` so the folder is legible.
+**Step 0 — Gather & organize.** Claude asks you for the papers (the ClinGen scoring rules are
+already built in, so you don't supply the SOP), then sorts the PDFs into a `Literature/` folder,
+renaming each to `Author Year – short title.pdf` so the folder is legible.
 
 **Step 1 — Read everything.** Because Macs often can't "see" inside PDFs, Claude first converts
-every PDF to text, then reads the SOP and all the papers, listing every patient, variant,
-phenotype, and experiment as it goes.
+every PDF to text, then reads all the papers, listing every patient, variant, phenotype, and
+experiment as it goes.
 
 **Step 2 — Precuration & lumping/splitting.** Claude notes what the gene does and the inheritance
 pattern, then applies ClinGen's **Lumping & Splitting** rules: if the different reported
 conditions share the same **molecular mechanism, inheritance, and phenotype spectrum**, they're
-"lumped" into one disease entity; otherwise they're "split." (For STAMBP everything lumps into
-MIC-CAP, and the cerebral-palsy-like motor signs are noted as an overlapping feature of that
-broader syndrome.)
+"lumped" into one disease entity; otherwise they're "split." A motor or other feature that
+overlaps the GCEP's disease of interest is noted as part of the broader syndrome where relevant.
 
 **Step 3 — Build the patient/variant table.** One row per affected individual, with a unique
 label, the DNA and protein change, zygosity, demographics, testing method, and the paper's PMID.
@@ -161,7 +160,7 @@ case-control evidence each have their own scoring.
 alteration** in patient cells, **model systems** (mouse/organoid), and **rescue** experiments.
 
 **Step 6 — Total & classify.** Genetic (≤12) + experimental (≤6) → **Definitive / Strong /
-Moderate / Limited** (STAMBP totals 18/18 → **Definitive**).
+Moderate / Limited** (a maximally-supported gene reaches 18/18 → **Definitive**).
 
 **Step 7 — Get the ontology IDs right.** Claude looks up the official **HPO** phenotype codes for
 the disease and the **MONDO** disease id, and verifies every **PMID** — it never invents an id.
@@ -177,8 +176,9 @@ next to each patient.
 **every single row** — each one re-reads that row's source paper and checks every field:
 is the HGVS variant exactly right? the zygosity? are the phenotypes actually reported for *this*
 patient? is an experiment genuinely *shown* in the paper or just *cited* from another? It then
-applies the corrections and gives you a changelog. (In the STAMBP run this caught a swapped
-patient ethnicity, a missing phenotype, and a DNA change the paper never actually stated.)
+applies the corrections and gives you a changelog. (In practice this catches things like a
+patient detail swapped between adjacent table columns, a reported phenotype that was missed, or a
+DNA change the paper never actually stated.)
 
 **Step 10 — Quality-control checklist.** A final pass over unique labels, scoring caps, ontology
 ids, provenance, and the classification before it's called done.
