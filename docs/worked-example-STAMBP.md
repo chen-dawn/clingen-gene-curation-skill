@@ -97,9 +97,14 @@ One AI reviewer per row re-read the source paper. Real corrections that resulted
 None changed the outcome (genetic still caps at 12, experimental at 6 → Definitive), but the
 record is now accurate.
 
-## Deliverables (Steps 10–11)
+## QC & deliverables (Steps 10–12)
 
-- **Scoring workbook** (GCI copy-paste + review columns) — built before the cross-check, corrected after.
-- **Evidence-summary text** — Definitive statement per the v7.1 template.
-- **PowerPoint** — built last: one slide per patient (clinical + variants + PMID + points) and one
-  per experiment (methods, findings, PMID, points, figure placeholder).
+- **Step 10 — QC:** a final pass over unique proband labels, scoring caps, ontology ids,
+  provenance, and the classification.
+- **Step 11 — Evidence summary:** the Definitive statement per the v7.1 template, saved as its
+  own file (`STAMBP_MICCAP_evidence_summary.md`) to paste into the GCI.
+- **Step 12 — PowerPoint (built last):** one slide per patient (clinical + variants + PMID +
+  points) and one per experiment (methods, findings, PMID, points, figure placeholder).
+
+The **scoring workbook** itself is built back at Step 8 (before the cross-check) and corrected
+afterward, so it is ready by the time the summary and deck are produced.
