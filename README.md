@@ -107,12 +107,17 @@ start a curation (below) and it will activate automatically.
 3. **Answer Claude's questions** (gene, disease, GCEP, and any lumping/splitting judgment calls).
    Claude then works through the whole curation and, at each stage, shows you what it found and
    asks before big decisions.
-4. **Get your files.** In your folder you'll end up with:
-   - `…_Scoring_Worksheet.xlsx` — the GCI copy-paste workbook (built first, before the check),
-   - `…_evidence_summary.md` — the evidence-summary text, **saved as its own file**, to paste into the GCI,
-   - `…_Curation_Deck.pptx` — the GCEP presentation (built last, after the fact-check).
+4. **Get your files.** You end up with three deliverables — see [Deliverables](#deliverables) below.
 
-You never have to run commands yourself — but if you want to, see **Manual script use** at the end.
+You never have to run commands yourself — but if you want to, see [Manual script use](#manual-script-use-optional--claude-normally-does-this) at the end.
+
+## Deliverables
+
+| File | What it is | Built at |
+|---|---|---|
+| `…_Scoring_Worksheet.xlsx` | GCI copy-paste workbook — every form field (Individual, Experimental, Family, Group, Case-Control) with the scores. **Navy** columns paste straight onto the GCI; **grey** columns are human-readable review helpers (patient summary, phenotype names, points, rationale). | Step 8 (corrected after the cross-check) |
+| `…_evidence_summary.md` | The ClinGen evidence-summary text (v7.1 template), **its own file**, to paste into the GCI. | Step 11 |
+| `…_Curation_Deck.pptx` | GCEP slide deck — one slide per patient and one per experiment, with placeholders for figure screenshots. | Step 12 (last) |
 
 ---
 
