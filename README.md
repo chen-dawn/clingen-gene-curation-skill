@@ -113,7 +113,9 @@ You never have to run commands yourself — but if you want to, see **Manual scr
 ## How the curation actually works (the 12 steps)
 
 This is what Claude is doing under the hood, in plain language. The running example is
-**STAMBP → microcephaly–capillary malformation syndrome (MIC-CAP)**.
+**STAMBP → microcephaly–capillary malformation syndrome (MIC-CAP)**. For a concrete,
+blow-by-blow record of a real run — the actual probands, scores, what the fact-check caught, and
+the final Definitive call — see **[docs/worked-example-STAMBP.md](docs/worked-example-STAMBP.md)**.
 
 **Step 0 — Gather & organize.** Claude asks you to drop all the PDFs in one folder, then sorts
 them into `ClinGen_SOP/` (the framework docs) and `Literature/` (the papers), renaming each paper
