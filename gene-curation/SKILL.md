@@ -2,10 +2,11 @@
 name: gene-curation
 description: >
   Perform a ClinGen gene–disease clinical validity curation end to end: organize
-  source papers, read the ClinGen SOP, make a lumping/splitting decision, score
-  genetic (case-level + segregation) and experimental evidence per SOP v10, look up
-  HPO/MONDO terms, and produce GCI-ready copy-paste sheets, an evidence-summary, and
-  a presentation deck. Use when the user mentions ClinGen, a GCEP, gene-disease
+  source papers, make a lumping/splitting decision, score genetic (case-level +
+  segregation) and experimental evidence against the built-in ClinGen SOP v10.1
+  rules (no SOP docs needed), look up HPO/MONDO terms, and produce GCI-ready
+  copy-paste sheets, an evidence-summary, and a presentation deck. Use when the
+  user mentions ClinGen, a GCEP, gene-disease
   validity, gene curation, scoring probands/variants, or the Gene Curation Interface
   (GCI). Works for any gene/disease, not just the example (STAMBP / MIC-CAP).
 ---
@@ -22,24 +23,29 @@ last. Reference files: `references/scoring_reference.md` (SOP scoring rules),
 `scripts/lookups.py` (HPO/MONDO/PMID lookups), `scripts/classify.py` (points → classification),
 `scripts/build_workbook.py` (full GCI workbook), `scripts/build_deck.js` (full presentation deck).
 
+**Built on (already baked in — do not ask the user for these):** ClinGen Gene Curation
+**SOP v10.1**, Standardized Evidence Summary **v7.1 (June 2026)**, and the current GCI curation
+forms (Individual / Family / Group / Case-Control / Experimental). The scoring rules, field maps,
+and summary template above are distilled from those. Only ask for a framework doc if the user's
+GCEP is on a **newer SOP version** than 10.1 — then read it and defer to it, noting the version.
+
 ## Step 0 — Gather the source material (ask the user first)
 
-Before anything else, ask the user to:
+Before anything else, tell the user **you already have the ClinGen framework built in** (SOP
+v10.1, Evidence Summary v7.1, and the GCI form fields — so they do **not** need to provide the
+SOP or Evidence Summary docs), then ask them to:
 
-1. **Make a list of the relevant papers** (the foundational gene-disease report plus
-   every case report, cohort, and functional/model paper) and **download the PDFs**.
-2. **Put all PDFs in one project folder.** Also include the two ClinGen framework docs:
-   the **Gene Curation SOP** (e.g. `gene_curation_sop_version_10_1.pdf`) and the
-   **Standardized Evidence Summary** text guide.
-3. Tell you the **gene**, the **asserted disease(s)/phenotype(s)**, and which **GCEP**
-   is doing the curation.
+1. **List the relevant papers** (the foundational gene-disease report plus every case report,
+   cohort, and functional/model paper) and **put the PDFs in one project folder**.
+2. Tell you the **gene**, the **asserted disease(s)/phenotype(s)**, and which **GCEP** is curating.
+3. *Optional:* if their GCEP uses a **newer SOP than v10.1**, drop that PDF in and you'll defer to it.
 
 Then **organize the folder** (do this for them):
 
-- `ClinGen_SOP/` — the SOP + Evidence Summary framework PDFs.
 - `Literature/` — all the papers. **Rename each** to `Author Year - short title.pdf`
   (e.g. `McDonell 2013 - STAMBP mutations cause MIC-CAP (Nat Genet).pdf`). Disambiguate
   same-author-same-year papers by topic.
+- `ClinGen_SOP/` — **only if** the user dropped in framework PDFs (e.g. a newer SOP).
 - Leave the user's own precuration deck at the root.
 
 ## Step 1 — Read everything
@@ -48,7 +54,8 @@ macOS often lacks `poppler`, so the Read tool can't render PDFs. Extract text wi
 **pdfplumber** instead: `scripts/extract_pdfs.py <folder>` writes a `.txt` per PDF to a
 scratch dir. Read:
 
-- The **SOP** (scoring rules, page refs) and **Evidence Summary guide** (the summary template).
+- The scoring rules and summary template are already in `references/` (SOP v10.1 / Evidence
+  Summary v7.1) — consult those; only read a framework PDF if the user supplied a newer SOP.
 - Every **paper**, building a running list of: probands, families, variants (cDNA +
   protein, zygosity), clinical features, and any functional/model/rescue experiments.
 

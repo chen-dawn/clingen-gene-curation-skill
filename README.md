@@ -96,10 +96,11 @@ start a curation (below) and it will activate automatically.
 
 ## How to use it
 
-1. **Collect the papers.** Make a new folder anywhere (e.g. `MYGENE_Curation`). Put in it:
-   - every relevant paper (the first report, all case reports/cohorts, and any functional/animal
-     studies) as PDFs, and
-   - the two ClinGen docs: the **Gene Curation SOP** and the **Standardized Evidence Summary**.
+1. **Collect the papers.** Make a new folder anywhere (e.g. `MYGENE_Curation`) and put every
+   relevant paper in it as PDFs (the first report, all case reports/cohorts, and any
+   functional/animal studies). **You do *not* need to add the ClinGen SOP or Evidence Summary
+   docs** — their rules are already built into the skill (SOP v10.1 / Evidence Summary v7.1). Only
+   add a ClinGen doc if your GCEP uses a **newer SOP version**, and the skill will defer to it.
 2. **Open Claude Code in that folder** and ask, in your own words, for example:
 
    > *"Help me curate STAMBP for the Cerebral Palsy GCEP. The papers are in this folder."*
