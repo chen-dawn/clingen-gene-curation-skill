@@ -87,7 +87,7 @@ case-level cannot also count within a case-control study. Case-control also caps
 | Class | Requirement |
 |---|---|
 | Definitive | Total ≥12; first assertion >3 yr ago; replicated in research **and** clinical settings; no valid contradictory evidence |
-| Strong | Total 12 but <3 yr since first assertion |
+| Strong | Total 12–18 but <3 yr since first assertion, or not yet replicated |
 | Moderate | 7–11 |
 | Limited | 1–6 |
 | No Known Disease Relationship | experimental only, no human genetic evidence |

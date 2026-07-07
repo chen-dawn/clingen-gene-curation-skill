@@ -14,8 +14,9 @@ def classify(genetic, experimental, years=0.0, replicated=True, contradictory=Fa
     total = g + e
     if contradictory:
         return total, "Disputed / Refuted (valid contradictory evidence — review with GCEP)"
-    if total == 0:
-        return total, "No Known Disease Relationship"
+    if g == 0:
+        return total, ("No Known Disease Relationship"
+                       + (" (experimental evidence only; no human genetic evidence)" if e > 0 else ""))
     if total <= 6:
         return total, "Limited"
     if total <= 11:

@@ -117,9 +117,10 @@ One row per **paper × experiment type**. Rescue evidence is strong; an in-vivo 
 ## Step 6 — Total & classification
 
 `Total = genetic (≤12) + experimental (≤6)`. Classify:
-**Definitive** (≥12, first report >3 yr ago, replicated in research + clinical settings,
-no valid contradictory evidence) · **Strong** (12, <3 yr) · **Moderate** (7–11) ·
-**Limited** (1–6) · plus Disputed/Refuted/No-known-relationship. `scripts/classify.py
+**Definitive** (12–18, first report >3 yr ago, replicated in research + clinical settings,
+no valid contradictory evidence) · **Strong** (12–18, but <3 yr or not yet replicated) ·
+**Moderate** (7–11) · **Limited** (1–6) · **No Known Disease Relationship** (no human genetic
+evidence) · **Disputed/Refuted** (valid contradictory evidence). `scripts/classify.py
 <genetic> <experimental> [years] [replicated] [contradictory]` computes it. See the Evidence
 Summary guide for the exact summary-statement templates.
 
@@ -137,7 +138,7 @@ Use `scripts/lookups.py` (`hpo OMIM:<id>` · `mondo "<disease>"` · `term HP:<id
   never invent a PMID. Papers without a PMID (some non-indexed journals) **cannot** be
   entered in the GCI; document them in the evidence-summary text instead.
 
-## Step 8 — Produce the deliverables
+## Step 8 — Build the GCI workbook (primary output)
 
 The **GCI workbook is the primary output** — build it now, once scoring/curation is complete
 and **before** the Step-9 cross-check (which then validates the rows in this file). Use
@@ -160,6 +161,10 @@ review, not pasted. Tabs (one row per evidence item):
   group counts, case/control power + statistics + bias questions); left empty unless that
   evidence type is used.
 - **Segregation** (eLOD helper), **Summary** (totals → classification), **HPO Reference**, **Legend**.
+
+`build_workbook.py` (and `build_deck.js` in Step 12) are **templates** — fill their data blocks
+(`INDIVIDUALS`, `EXPERIMENTS`, `FAMILIES`, …) with this curation's rows, then run. The deck reuses
+the same corrected rows, so build/finalize the workbook data first.
 
 The **evidence-summary text** and the **presentation deck** are produced at the **end** (Steps
 11–12), *after* the cross-check and QC, so they reflect the corrected data.
@@ -186,7 +191,8 @@ tool; run them in parallel, or use a Workflow to pipeline them):
 - **Also check for omissions across the set:** probands or experiments present in a paper but
   missing from the table; variants counted twice; recurrent/founder variants; non-PMID sources.
 
-Collect all agent findings, **apply the corrections** to the workbook & evidence summary, and
+Collect all agent findings, **apply the corrections to the workbook** (the evidence summary and
+deck are built afterward, from the corrected data), and
 give the user a short changelog of what was fixed. Prefer verifying against the actual
 extracted paper text (Step 1), citing the specific figure/table/section where each value
 comes from. Re-run `build_workbook.py` after edits (the summary & deck aren't built until Steps 11–12).

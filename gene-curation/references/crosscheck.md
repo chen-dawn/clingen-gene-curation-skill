@@ -15,8 +15,9 @@ Workflow if the user opted into orchestration):
 
 Give each agent (a) the **exact recorded row values** and (b) the **path to that paper's
 extracted `.txt`** (from Step 1). Agents cannot render PDFs — always point them at the text
-file. Then: collect every agent's findings → **apply corrections** to the workbook/deck/
-summary → give the user a **changelog**. Re-run the build scripts after edits.
+file. Then: collect every agent's findings → **apply corrections** to the **workbook** (the
+evidence summary and deck are produced afterward, Steps 11–12, from the corrected data) → give
+the user a **changelog**. Re-run `build_workbook.py` after edits.
 
 Each agent returns: a one-line `CONFIRMED:` then `ISSUES:` bullets, **each with the corrected
 value and where in the paper it appears (table/figure/section/line)**. If clean: "All fields
@@ -108,4 +109,3 @@ does not — case-level caps at 12, experimental at 6).
   recommend obtaining the primary PMID.
 - **Non-English papers**: verify against the original-language body + figures, not just the English
   abstract (abstracts can carry translation errors, e.g., "described" vs "not described").
-```
